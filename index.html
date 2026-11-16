@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#193b78" />
+<title>Double & Halve | Mental Math Flashcards</title>
+<style>
+  :root {
+    --ink:#17243b; --muted:#687791; --blue:#2858d8; --navy:#193b78;
+    --sky:#edf3ff; --line:#e2e9f4; --gold:#ffd66e; --green:#13734c;
+    --green-bg:#e9f8f0; --amber:#8a5c09; --amber-bg:#fff7e6;
+    --bg:#f3f6fc; --shadow:0 18px 48px rgba(31,56,100,.11);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 8% 0%,rgba(255,214,110,.22),transparent 24rem),radial-gradient(circle at 100% 15%,rgba(80,132,255,.14),transparent 27rem),var(--bg)}
+  button,select{font:inherit} button{cursor:pointer}
+  .shell{width:min(960px,calc(100% - 30px));margin:0 auto;padding:24px 0 36px}
+  .topline{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-.035em;color:var(--navy)}
+  .brand-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--blue);color:white;font-size:22px;box-shadow:0 7px 16px #2858d833}
+  .top-note{font-size:13px;font-weight:700;color:var(--muted)}
+  .hero{position:relative;overflow:hidden;border-radius:25px;padding:28px clamp(21px,5vw,48px);color:white;background:linear-gradient(115deg,#193b78 0%,#2858d8 68%,#4d7bed 100%);box-shadow:var(--shadow)}
+  .hero:after{content:"×";position:absolute;right:5%;top:-55px;color:#ffffff18;font-size:240px;line-height:1;font-weight:900;pointer-events:none}
+  .eyebrow{display:inline-flex;gap:7px;align-items:center;padding:7px 12px;border:1px solid #ffffff3b;border-radius:99px;background:#ffffff20;font-size:11px;font-weight:850;letter-spacing:.1em;text-transform:uppercase}
+  h1{position:relative;z-index:1;margin:15px 0 8px;font-size:clamp(33px,6vw,53px);line-height:1.02;letter-spacing:-.055em}
+  .hero p{position:relative;z-index:1;max-width:650px;margin:0;color:#ffffffdf;font-size:clamp(14px,2vw,17px);line-height:1.6}
+  .hero-equation{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:20px}
+  .hero-equation span{padding:9px 14px;border-radius:13px;background:#fff;color:var(--navy);font-size:clamp(20px,3.5vw,28px);font-weight:950;letter-spacing:-.045em}
+  .hero-equation b{color:var(--gold);font-size:22px}
+  .panel{margin-top:20px;padding:clamp(18px,4vw,30px);border:1px solid #dfe7f3;border-radius:22px;background:#ffffffed;box-shadow:var(--shadow)}
+  .heading{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:18px}
+  h2{margin:0 0 6px;font-size:clamp(21px,3.5vw,28px);letter-spacing:-.04em}
+  .sub{margin:0;color:var(--muted);line-height:1.5;font-size:14px}
+  .tools{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin:18px 0 15px}
+  .filter-wrap{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:13px;font-weight:800}
+  select{padding:10px 34px 10px 12px;border:1px solid var(--line);border-radius:11px;background:white;color:var(--ink);font-weight:750;outline:none}
+  select:focus,button:focus-visible{outline:3px solid #2858d83a;outline-offset:2px}
+  .stats{display:flex;gap:8px}
+  .stat{min-width:82px;padding:8px 10px;text-align:center;border:1px solid var(--line);border-radius:12px;background:#f7f9fd}
+  .stat strong{display:block;color:var(--navy);font-size:18px}
+  .stat span{font-size:10px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .progress-track{height:8px;margin:10px 0 21px;overflow:hidden;border-radius:99px;background:#edf1f7}
+  .progress-fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#2858d8,#77a0ff);transition:width .25s ease}
+  .card-stage{perspective:1200px}
+  .flashcard{position:relative;width:100%;min-height:330px;border:0;border-radius:22px;background:transparent;padding:0;text-align:center;color:inherit;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.2,.75,.25,1);}
+  .flashcard.flipped{transform:rotateY(180deg)}
+  .face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 20px;border:1px solid #e1e9f7;border-radius:22px;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 12px 30px #263e6712}
+  .front{background:linear-gradient(145deg,#f8faff,#edf3ff)}
+  .back{transform:rotateY(180deg);background:linear-gradient(145deg,#f4fbf7,#e9f8f0);border-color:#cee9d9}
+  .face-label{margin-bottom:18px;color:var(--muted);font-size:11px;font-weight:900;letter-spacing:.15em;text-transform:uppercase}
+  .problem{font-size:clamp(48px,10vw,82px);font-weight:950;letter-spacing:-.07em;color:var(--navy);line-height:1.1}
+  .prompt{max-width:540px;margin:15px 0 0;color:#596984;font-size:15px;line-height:1.55}
+  .tap-hint{display:inline-flex;align-items:center;gap:7px;margin-top:25px;padding:9px 13px;border-radius:99px;background:#ffffffc9;color:var(--blue);font-size:12px;font-weight:850}
+  .worked{display:grid;gap:9px;justify-items:center}
+  .worked .step{font-size:clamp(19px,4vw,28px);font-weight:850;color:#27533f;letter-spacing:-.035em}
+  .worked .arrow{color:#3d9769;font-size:20px;font-weight:900;line-height:1}
+  .worked .answer{margin-top:3px;padding:8px 18px;border-radius:13px;background:#fff;color:#126a43;font-size:clamp(35px,7vw,52px);font-weight:950;letter-spacing:-.05em}
+  .explain{max-width:560px;margin:14px 0 0;color:#476556;font-size:13px;line-height:1.5}
+  .card-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:14px 2px 0;color:var(--muted);font-size:12px;font-weight:750}
+  .pill{padding:6px 10px;border:1px solid var(--line);border-radius:99px;background:#fff}
+  .controls{display:flex;justify-content:center;flex-wrap:wrap;gap:9px;margin-top:18px}
+  .btn{border:0;border-radius:12px;padding:12px 17px;font-weight:850;transition:transform .12s ease,filter .12s ease}
+  .btn:hover{filter:brightness(1.04);transform:translateY(-1px)}
+  .btn:disabled{opacity:.42;cursor:not-allowed;transform:none}
+  .primary{background:var(--blue);color:#fff;box-shadow:0 7px 15px #2858d82e}
+  .secondary{background:#edf2fc;color:var(--navy)}
+  .success{background:var(--green-bg);color:var(--green);border:1px solid #ccebd9}
+  .review{background:var(--amber-bg);color:var(--amber);border:1px solid #f1dfb6}
+  .quiet{background:transparent;color:var(--muted);border:1px solid var(--line)}
+  .key-note{margin:13px 0 0;text-align:center;color:var(--muted);font-size:12px;line-height:1.5}
+  .summary{display:none;margin-top:18px;padding:17px;border:1px solid var(--line);border-radius:16px;background:#f8faff}
+  .summary.show{display:block}
+  .summary h3{margin:0 0 6px;color:var(--navy)}
+  .summary p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+  .footer{text-align:center;padding:18px 0 0;color:#8491a6;font-size:12px}
+  @media(max-width:600px){.top-note{display:none}.hero{border-radius:20px}.heading{display:block}.stats{width:100%}.stat{flex:1;min-width:0}.flashcard{min-height:315px}.face{padding:22px 14px}.controls .btn{flex:1 1 42%}}
+  @media(prefers-reduced-motion:reduce){.flashcard,.progress-fill,.btn{transition:none}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="topline">
+    <div class="brand"><span class="brand-mark">×</span><span>MENTAL MATH LAB</span></div>
+    <div class="top-note">Think smart. Calculate faster.</div>
+  </div>
+
+  <header class="hero">
+    <div class="eyebrow">⚡ Flashcard practice</div>
+    <h1>Double one.<br>Halve the other.</h1>
+    <p>Study the problem on the front. Think of an easier equivalent multiplication, then flip the card to check your reasoning.</p>
+    <div class="hero-equation" aria-label="Four times five equals two times ten equals twenty">
+      <span>4 × 5</span><b>→</b><span>2 × 10</span><b>=</b><span>20</span>
+    </div>
+  </header>
+
+  <main class="panel">
+    <div class="heading">
+      <div><h2>Double &amp; Halve Flashcards</h2><p class="sub">Try to solve each card before revealing the answer.</p></div>
+    </div>
+
+    <div class="tools">
+      <div class="filter-wrap"><label for="level">Card set</label>
+        <select id="level">
+          <option value="all">All levels</option>
+          <option value="starter">Starter</option>
+          <option value="intermediate">Intermediate</option>
+          <option value="challenge">Challenge</option>
+        </select>
+      </div>
+      <div class="stats" aria-live="polite">
+        <div class="stat"><strong id="cardCount">1/30</strong><span>Card</span></div>
+        <div class="stat"><strong id="knownCount">0</strong><span>Known</span></div>
+        <div class="stat"><strong id="reviewCount">0</strong><span>Review</span></div>
+      </div>
+    </div>
+    <div class="progress-track" aria-label="Deck progress"><div class="progress-fill" id="progressFill"></div></div>
+
+    <div class="card-stage">
+      <button class="flashcard" id="flashcard" type="button" aria-label="Flashcard. Activate to reveal the answer." aria-pressed="false">
+        <span class="face front">
+          <span class="face-label" id="frontLabel">QUESTION · STARTER</span>
+          <span class="problem" id="problem">4 × 5</span>
+          <span class="prompt">Use the double-and-halve trick.<br>What easier multiplication can you make, and what is the product?</span>
+          <span class="tap-hint">↻ Tap or press Enter to reveal</span>
+        </span>
+        <span class="face back">
+          <span class="face-label">ANSWER · CHECK YOUR THINKING</span>
+          <span class="worked">
+            <span class="step" id="halveStep">Halve 4 → 2</span>
+            <span class="step" id="doubleStep">Double 5 → 10</span>
+            <span class="arrow">↓</span>
+            <span class="step" id="newEquation">2 × 10</span>
+            <span class="answer" id="product">20</span>
+          </span>
+          <p class="explain" id="explanation">The product stays the same because one factor is halved while the other is doubled.</p>
+          <span class="tap-hint">↻ Tap to return to the question</span>
+        </span>
+      </button>
+    </div>
+
+    <div class="card-meta"><span class="pill" id="levelPill">STARTER</span><span id="statusText">Not rated yet</span></div>
+
+    <div class="controls">
+      <button class="btn quiet" id="prevBtn" type="button">← Previous</button>
+      <button class="btn secondary" id="flipBtn" type="button">Reveal answer</button>
+      <button class="btn quiet" id="nextBtn" type="button">Next →</button>
+    </div>
+    <div class="controls" id="ratingControls" hidden>
+      <button class="btn success" id="knownBtn" type="button">✓ I knew it</button>
+      <button class="btn review" id="reviewBtn" type="button">↻ Practice again</button>
+      <button class="btn secondary" id="shuffleBtn" type="button">⇄ Shuffle cards</button>
+    </div>
+    <p class="key-note">Tip: You can use the ← and → arrow keys to move between cards, and Space or Enter to flip.</p>
+
+    <section class="summary" id="summary" aria-live="polite">
+      <h3>Nice work!</h3>
+      <p id="summaryText">You have reviewed the deck.</p>
+    </section>
+  </main>
+  <div class="footer">Mental Math Lab · Double-and-Halve Multiplication</div>
+</div>
+
+<script>
+(() => {
+  const sets = {
+    starter: [[4,5],[6,5],[8,5],[12,5],[14,5],[18,5],[20,5],[24,5],[28,5],[32,5]],
+    intermediate: [[4,25],[8,25],[12,25],[16,25],[20,25],[24,25],[28,25],[32,25],[36,25],[48,25]],
+    challenge: [[16,125],[24,125],[32,125],[40,125],[48,125],[56,125],[64,125],[36,25],[44,25],[52,25]]
+  };
+  const $ = id => document.getElementById(id);
+  let deck = [];
+  let index = 0;
+  let flipped = false;
+  const ratings = new Map();
+
+  function makeDeck(level) {
+    const keys = level === 'all' ? Object.keys(sets) : [level];
+    return keys.flatMap(key => sets[key].map(([a,b], i) => ({a,b,level:key,id:`${key}-${i}`})));
+  }
+  function shuffle(items) {
+    const copy = items.slice();
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  }
+  function setFlipped(value) {
+    flipped = value;
+    $('flashcard').classList.toggle('flipped', flipped);
+    $('flashcard').setAttribute('aria-pressed', String(flipped));
+    $('flipBtn').textContent = flipped ? 'Show question' : 'Reveal answer';
+    $('ratingControls').hidden = !flipped;
+  }
+  function updateStats() {
+    const known = deck.filter(card => ratings.get(card.id) === 'known').length;
+    const review = deck.filter(card => ratings.get(card.id) === 'review').length;
+    $('cardCount').textContent = `${index + 1}/${deck.length}`;
+    $('knownCount').textContent = known;
+    $('reviewCount').textContent = review;
+    $('progressFill').style.width = `${deck.length ? (known / deck.length) * 100 : 0}%`;
+  }
+  function render() {
+    if (!deck.length) return;
+    const card = deck[index];
+    setFlipped(false);
+    $('problem').textContent = `${card.a} × ${card.b}`;
+    $('frontLabel').textContent = `QUESTION · ${card.level.toUpperCase()}`;
+    $('halveStep').textContent = `Halve ${card.a} → ${card.a / 2}`;
+    $('doubleStep').textContent = `Double ${card.b} → ${card.b * 2}`;
+    $('newEquation').textContent = `${card.a / 2} × ${card.b * 2}`;
+    $('product').textContent = (card.a * card.b).toLocaleString();
+    $('explanation').textContent = `The product remains ${card.a * card.b}. Dividing one factor by 2 and multiplying the other by 2 keeps the overall product unchanged.`;
+    $('levelPill').textContent = card.level.toUpperCase();
+    const rating = ratings.get(card.id);
+    $('statusText').textContent = rating === 'known' ? '✓ Marked as known' : rating === 'review' ? '↻ Marked for review' : 'Not rated yet';
+    $('prevBtn').disabled = index === 0;
+    $('nextBtn').disabled = index === deck.length - 1;
+    $('summary').classList.toggle('show', deck.every(c => ratings.has(c.id)));
+    $('summaryText').textContent = `You marked ${deck.filter(c => ratings.get(c.id) === 'known').length} card(s) as known and ${deck.filter(c => ratings.get(c.id) === 'review').length} for another look. Keep reviewing the cards marked for practice.`;
+    updateStats();
+  }
+  function move(delta) {
+    const next = index + delta;
+    if (next < 0 || next >= deck.length) return;
+    index = next;
+    render();
+  }
+  function selectDeck() {
+    deck = makeDeck($('level').value);
+    index = 0;
+    $('summary').classList.remove('show');
+    render();
+  }
+  function rate(value) {
+    const card = deck[index];
+    ratings.set(card.id, value);
+    updateStats();
+    $('statusText').textContent = value === 'known' ? '✓ Marked as known' : '↻ Marked for review';
+    if (index < deck.length - 1) move(1);
+    else {
+      $('summary').classList.add('show');
+      $('summaryText').textContent = `Deck finished! You marked ${deck.filter(c => ratings.get(c.id) === 'known').length} card(s) as known and ${deck.filter(c => ratings.get(c.id) === 'review').length} for another look.`;
+    }
+  }
+
+  $('flashcard').addEventListener('click', () => setFlipped(!flipped));
+  $('flipBtn').addEventListener('click', () => setFlipped(!flipped));
+  $('prevBtn').addEventListener('click', () => move(-1));
+  $('nextBtn').addEventListener('click', () => move(1));
+  $('knownBtn').addEventListener('click', () => rate('known'));
+  $('reviewBtn').addEventListener('click', () => rate('review'));
+  $('shuffleBtn').addEventListener('click', () => { deck = shuffle(deck); index = 0; $('summary').classList.remove('show'); render(); });
+  $('level').addEventListener('change', selectDeck);
+  document.addEventListener('keydown', event => {
+    if (event.target instanceof HTMLSelectElement) return;
+    if (event.key === 'ArrowRight') move(1);
+    if (event.key === 'ArrowLeft') move(-1);
+    if (event.key === ' ' || event.key === 'Enter') {
+      if (event.target instanceof HTMLButtonElement || event.target instanceof HTMLInputElement) return;
+      event.preventDefault(); setFlipped(!flipped);
+    }
+  });
+  deck = makeDeck('all');
+  render();
+})();
+</script>
+</body>
+</html>
